@@ -1,6 +1,6 @@
 html {
-    line-height: 1.15; /* 1 */
-    -webkit-text-size-adjust: 100%; /* 2 */
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
@@ -17,15 +17,15 @@ html {
   }
 
   hr {
-    box-sizing: content-box; /* 1 */
-    height: 0; /* 1 */
-    overflow: visible; /* 2 */
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible;
   }
 
 
   pre {
-    font-family: monospace, monospace; /* 1 */
-    font-size: 1em; /* 2 */
+    font-family: monospace, monospace;
+    font-size: 1em;
   }
 
   a {
@@ -33,9 +33,9 @@ html {
   }
 
   abbr[title] {
-    border-bottom: none; /* 1 */
-    text-decoration: underline; /* 2 */
-    text-decoration: underline dotted; /* 2 */
+    border-bottom: none;
+    text-decoration: underline;
+    text-decoration: underline dotted;
   }
 
   b,
@@ -46,8 +46,8 @@ html {
   code,
   kbd,
   samp {
-    font-family: monospace, monospace; /* 1 */
-    font-size: 1em; /* 2 */
+    font-family: monospace, monospace;
+    font-size: 1em;
   }
 
   small {
@@ -74,19 +74,17 @@ html {
     border-style: none;
   }
 
-
-// Подключение Inter Regular
 @font-face {
   font-family: 'Inter';
   src: url('/assets/fonts/Inter-regular.woff') format('woff');
-  font-weight: 400; // normal
+  font-weight: 400;
   font-style: normal;
-  font-display: swap; // для оптимизации загрузки
+  font-display: swap;
 }
 
 body {
   font-family: 'Inter', sans-serif;
-  font-weight: 500; // обычное начертание
+  font-weight: 500;
   letter-spacing: 0.5px;
 }
 
