@@ -1,13 +1,15 @@
 <div class="header">
-  <div class="header-left">
+  <div class="header-block">
+   <div class="header-left">
     <div class="header-logo">
       <img src="/assets/Frame.svg" alt="Логотип">
     </div>
     <nav class="header-nav">
-      <a class="header-nav-item">Главная</a>
-      <a class="header-nav-item">О компании</a>
-      <a class="header-nav-item">Каталог</a>
-    </nav>
+      <a class="header-nav-item">{{firstheader1}}</a>
+      <a class="header-nav-item">{{firstheader2}}</a>
+      <a class="header-nav-item" *ngIf="isShowCatalog">{{firstheader3}}</a>
+     </nav>
+     <button (click)="isShowCatalog = !isShowCatalog">Скрыть/Показать каталог</button>
   </div>
   
   <div class="header-right">
@@ -17,7 +19,7 @@
     <div class="header-nav2">
       <a class="header-nav-item2">+7(965) 084-29-29</a>
       <div class="header-nav-item2">
-        <img src="/assets/heart%201.svg" alt="сердце" class="icon2">
+        <img src="/assets/heart.svg" alt="сердце" class="icon2">
       </div>
       <button class="cart-container">
         <img src="/assets/cart.svg" alt="корзина" class="icon">
@@ -25,17 +27,21 @@
       </button>
     </div>
   </div>
+ </div>
 </div>
 
 <div class="header-under">
   <div class="header-content">
     <div class="header-stroky">☰</div>
     <nav class="under-nav">
-      <a class="under-nav-item">Каталог</a>
-      <a class="under-nav-item">Стройматериалы</a>
-      <a class="under-nav-item">Инструменты</a>
-      <a class="under-nav-item">Электрика</a>
-      <a class="under-nav-item">Интерьер и одежда</a>
+      <a *ngFor="let item of catalog"
+      class="under-nav-item"
+      [style.text-transform]="isUpperCase ? 'uppercase' : 'none' ">
+    {{ item }}
+    </a>
+    <button type="button" (click)="toggleText()">
+      изменить текст
+    </button>
     </nav>
     <div class="header-actions">
       <div class="search-container">
@@ -51,10 +57,12 @@
 </div>
 
 <div class="banner-container">
-  <img src="/assets/Rectangle 5.png" alt="background-targe">
+   <button (click)="isShowImg = !isShowImg">Скрыть/Показать каталог</button>
+  <img *ngIf="isShowImg"
+   src="/assets/Rectangle 5.png" alt="background-targe" >
   <div class="overlay">
     <div class="overlay-content">
-      <h1 class="overlay-text">Инструмент для вашего<br>бизнеса</h1>
+      <h1 class="overlay-text">Инструмент для вашего бизнеса</h1>
     </div>
   </div>
 </div>
@@ -80,72 +88,353 @@
     </div>
   </div>
 </div>
+</div>
 
 <div class="content-block">
   <div class="item-cards">
-    <div class="item-cards__pagination">
-      <button class="item-cards__pagination-button active-button">1</button>
-      <button class="item-cards__pagination-button">2</button>
-      <button class="item-cards__pagination-button">3</button>
-      <button class="item-cards__pagination-button">4</button>
-      <button class="item-cards__pagination-button">5</button>
-    </div>
-  <div class="item-cards__grid">
-    <div class="item-cards__grid-left">
-      <div class="item-cards__grid-left-text">
-        Строительный отделочный инструмент
-      </div>
-      <div class="item-cards__grid-left-action">
-        <span style="margin-right: 10px;">Перейти в каталог</span>
-        <a class="item-cards__grid-left-action-link">
-          <img src="/assets/Frame-20.png">
-        </a>
-      </div>
-    </div>
-    <div class="item-cards__grid-right">
-      <div class="item-cards__grid-right-block-1">
-        <div class="item-cards__grid-right-block-1-text">
-          Эмали
+   <div class="item-cards__pagination">
+  <button
+   type="button"
+    *ngFor="let page of newPages"
+    class="item-cards__pagination-button"
+    [class.active-button]="page === activePage"
+    (click)="activePage = page">
+    {{ page }}
+  </button>
+</div>
+    <div class="item-cards__grid">
+      <div class="item-cards__grid-left">
+        <div class="item-cards__grid-left-text">
+          Строительный отделочный инструмент
         </div>
-        <div class="item-cards__grid-right-block-action-1">
-        <span style="margin-right: 10px;">Перейти в каталог</span>
-        <a class="item-cards__grid-right-block-action-link-1">
-          <img src="/assets/Frame-20.png">
-        </a>
-      </div>
-      </div>
-      <div class="item-cards__grid-right-block-2">
-        <div class="item-cards__grid-right-block-2-text">
-         Лакокрасочные материалы
+        <div class="item-cards__grid-left-action">
+          <span style="margin-right: 10px;">Перейти в каталог</span>
+          <a class="item-cards__grid-left-action-link">
+            <img src="/assets/Frame-20.png">
+          </a>
         </div>
-        <div class="item-cards__grid-right-block-action-2">
-        <span style="margin-right: 10px;">Перейти в каталог</span>
-        <a class="item-cards__grid-right-block-action-link-2">
-          <img src="/assets/Frame-20.png">
-        </a>
       </div>
-      </div>
-      <div class="item-cards__grid-right-block-3">
-        <div class="item-cards__grid-right-block-3-text">
-        Пены, клеи и<br>герметики
+      <div class="item-cards__grid-right">
+        <div class="item-cards__grid-right-block-1">
+          <div class="item-cards__grid-right-block-1-text">
+            Эмали
+          </div>
+          <div class="item-cards__grid-right-block-action-1">
+            <span style="margin-right: 10px;">Перейти в каталог</span>
+            <a class="item-cards__grid-right-block-action-link-1">
+              <img src="/assets/Frame-20.png">
+            </a>
+          </div>
         </div>
-        <div class="item-cards__grid-right-block-action-3">
-        <span style="margin-right: 10px;">Перейти в каталог</span>
-        <a class="item-cards__grid-right-block-action-link-3">
-          <img src="/assets/Frame-20.png">
-        </a>
-      </div>
-      </div>
-      <div class="item-cards__grid-right-block-4">
-        <div class="item-cards__grid-right-block-4-text">
-         Розетки и выключатели
+        <div class="item-cards__grid-right-block-2">
+          <div class="item-cards__grid-right-block-2-text">
+            Лакокрасочные материалы
+          </div>
+          <div class="item-cards__grid-right-block-action-2">
+            <span style="margin-right: 10px;">Перейти в каталог</span>
+            <a class="item-cards__grid-right-block-action-link-2">
+              <img src="/assets/Frame-20.png">
+            </a>
+          </div>
         </div>
-        <div class="item-cards__grid-right-block-action-1">
-        <span style="margin-right: 10px;">Перейти в каталог</span>
-        <a class="item-cards__grid-right-block-action-link-1">
-          <img src="/assets/Frame-20.png">
-        </a>
+        <div class="item-cards__grid-right-block-3">
+          <div class="item-cards__grid-right-block-3-text">
+            Пены, клеи и герметики
+          </div>
+          <div class="item-cards__grid-right-block-action-3">
+            <span style="margin-right: 10px;">Перейти в каталог</span>
+            <a class="item-cards__grid-right-block-action-link-3">
+              <img src="/assets/Frame-20.png">
+            </a>
+          </div>
+        </div>
+        <div class="item-cards__grid-right-block-4">
+          <div class="item-cards__grid-right-block-4-text">
+            Розетки и выключатели
+          </div>
+          <div class="item-cards__grid-right-block-action-1">
+            <span style="margin-right: 10px;">Перейти в каталог</span>
+            <a class="item-cards__grid-right-block-action-link-1">
+              <img src="/assets/Frame-20.png">
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+
+  <div class="item-catalog">
+    <div class="item-cards-catalog-text">
+      Популярные товары
+    </div>
+    <a class="item-cards-catalog-action">
+      Посмотреть все товары
+    </a>
+  </div>
+
+  <div class="item-cards-catalog">
+    <div class="item-catalog-blocks-1">
+      <img src="/assets/Sale.png" alt="sale" class="icon-sale">
+      <img src="/assets/Heart.png" alt="heart" class="icon-heart">
+      <img src="/assets/wheel_cleaning.png" alt="wheel" class="icon-wheel">
+      <div class="item-catalog-name__product">Круг зачистной 125х6х22
+        <div class="product-article"> Артикул 00004</div>
+        <div class="price-product">Цена за штуку</div>
+        <div class="price-product-sale">
+          <span class="old-price">52 руб.</span>
+          <span class="new-price">48 руб.</span>
+        </div>
+        <div class="quantity-control">Количество</div>
+        <div class="action-button">
+          <button class="action-minus">-</button>
+          <span>1</span>
+          <button class="action-plus">+</button>
+        </div>
+        <button class="price-product-action">
+          <img src="/assets/Frame-37.svg">
+        </button>
+      </div>
+    </div>
+    <div class="item-catalog-blocks-2">
+      <img src="/assets/Sale.png" alt="sale" class="icon-sale">
+      <img src="/assets/Heart.png" alt="heart" class="icon-heart">
+      <img src="/assets/wheel_cleaning.png" alt="wheel" class="icon-wheel">
+      <div class="item-catalog-name__product">Круг зачистной 125х6х22
+        <div class="product-article"> Артикул 00004</div>
+        <div class="price-product">Цена за штуку</div>
+        <div class="price-product-sale">
+          <span class="old-price">52 руб.</span>
+          <span class="new-price">48 руб.</span>
+        </div>
+        <div class="quantity-control">Количество</div>
+        <div class="action-button">
+          <button class="action-minus">-</button>
+          <span>1</span>
+          <button class="action-plus">+</button>
+        </div>
+        <button class="price-product-action">
+          <img src="/assets/Frame-37.svg">
+        </button>
+      </div>
+    </div>
+    <div class="item-catalog-blocks-3">
+      <img src="/assets/news.png" alt="news" class="icon-news">
+      <img src="/assets/Sale.png" alt="sale" class="icon-sale">
+      <img src="/assets/Heart.png" alt="heart" class="icon-heart">
+      <img src="/assets/wheel_cleaning.png" alt="wheel" class="icon-wheel">
+      <div class="item-catalog-name__product">Круг зачистной 125х6х22
+        <div class="product-article"> Артикул 00004</div>
+        <div class="price-product">Цена за штуку</div>
+        <div class="price-product-sale">
+          <span class="old-price">52 руб.</span>
+          <span class="new-price">48 руб.</span>
+        </div>
+        <div class="quantity-control">Количество</div>
+        <div class="action-button">
+          <button class="action-minus">-</button>
+          <span>1</span>
+          <button class="action-plus">+</button>
+        </div>
+        <button class="price-product-action">
+          <img src="/assets/Frame-37.svg">
+        </button>
+      </div>
+    </div>
+    <div class="item-catalog-blocks-4">
+      <img src="/assets/news.png" alt="news" class="icon-news">
+      <img src="/assets/Heart.png" alt="heart" class="icon-heart">
+      <img src="/assets/wheel_cleaning.png" alt="wheel" class="icon-wheel">
+      <div class="item-catalog-name__product">Круг зачистной 125х6х22
+        <div class="product-article"> Артикул 00004</div>
+        <div class="price-product">Цена за штуку</div>
+        <div class="price-product-sale">
+          <span class="old-price">52 руб.</span>
+          <span class="new-price">48 руб.</span>
+        </div>
+        <div class="quantity-control">Количество</div>
+        <div class="action-button">
+          <button class="action-minus">-</button>
+          <span>1</span>
+          <button class="action-plus">+</button>
+        </div>
+        <button class="price-product-action">
+          <img src="/assets/Frame-37.svg">
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-nav">
+    <div class="content-nav-block">
+      <div class="content-nav-text">
+        Более 10 000 наименований
+      </div>
+      <div class="content-nav-text-down">
+        Инструмент для вашего бизнеса, разнообразных марок
+      </div>
+      <a class="content-nav-action">
+        Перейти в каталог
+      </a>
+    </div>
+  </div>
+
+  <div class="item-catalog">
+    <div class="item-cards-catalog-text">
+      Новинки
+    </div>
+    <a class="item-cards-catalog-action">
+      Посмотреть все товары
+    </a>
+  </div>
+
+  <div class="item-cards-catalog">
+    <div class="item-catalog-blocks-1">
+      <img src="/assets/news.png" alt="news" class="icon-news">
+      <img src="/assets/Heart.png" alt="heart" class="icon-heart">
+      <img src="/assets/wheel_cleaning.png" alt="wheel" class="icon-wheel">
+      <div class="item-catalog-name__product">Круг зачистной 125х6х22
+        <div class="product-article"> Артикул 00004</div>
+        <div class="price-product">Цена за штуку</div>
+        <div class="price-product-sale">
+          <span class="fix-price">52 руб.</span>
+        </div>
+        <div class="quantity-control">Количество</div>
+        <div class="action-button">
+          <button class="action-minus">-</button>
+          <span>1</span>
+          <button class="action-plus">+</button>
+        </div>
+        <button class="price-product-action">
+          <img src="/assets/Frame-37.svg">
+        </button>
+      </div>
+    </div>
+    <div class="item-catalog-blocks-2">
+      <img src="/assets/news.png" alt="news" class="icon-news">
+      <img src="/assets/Heart.png" alt="heart" class="icon-heart">
+      <img src="/assets/wheel_cleaning.png" alt="wheel" class="icon-wheel">
+      <div class="item-catalog-name__product">Круг зачистной 125х6х22
+        <div class="product-article"> Артикул 00004</div>
+        <div class="price-product">Цена за штуку</div>
+        <div class="price-product-sale">
+          <span class="fix-price">52 руб.</span>
+        </div>
+        <div class="quantity-control">Количество</div>
+        <div class="action-button">
+          <button class="action-minus">-</button>
+          <span>1</span>
+          <button class="action-plus">+</button>
+        </div>
+        <button class="price-product-action">
+          <img src="/assets/Frame-37.svg">
+        </button>
+      </div>
+    </div>
+    <div class="item-catalog-blocks-3">
+      <img src="/assets/news.png" alt="news" class="icon-news">
+      <img src="/assets/Heart.png" alt="heart" class="icon-heart">
+      <img src="/assets/wheel_cleaning.png" alt="wheel" class="icon-wheel">
+      <div class="item-catalog-name__product">Круг зачистной 125х6х22
+        <div class="product-article"> Артикул 00004</div>
+        <div class="price-product">Цена за штуку</div>
+        <div class="price-product-sale">
+          <span class="fix-price">52 руб.</span>
+        </div>
+        <div class="quantity-control">Количество</div>
+        <div class="action-button">
+          <button class="action-minus">-</button>
+          <span>1</span>
+          <button class="action-plus">+</button>
+        </div>
+        <button class="price-product-action">
+          <img src="/assets/Frame-37.svg">
+        </button>
+      </div>
+    </div>
+    <div class="item-catalog-blocks-4">
+      <img src="/assets/news.png" alt="news" class="icon-news">
+      <img src="/assets/Heart.png" alt="heart" class="icon-heart">
+      <img src="/assets/wheel_cleaning.png" alt="wheel" class="icon-wheel">
+      <div class="item-catalog-name__product">Круг зачистной 125х6х22
+        <div class="product-article"> Артикул 00004</div>
+        <div class="price-product">Цена за штуку</div>
+        <div class="price-product-sale">
+          <span class="fix-price">52 руб.</span>
+        </div>
+        <div class="quantity-control">Количество</div>
+        <div class="action-button">
+          <button class="action-minus">-</button>
+          <span>1</span>
+          <button class="action-plus">+</button>
+        </div>
+        <button class="price-product-action">
+          <img src="/assets/Frame-37.svg">
+        </button>
+      </div>
+    </div>
+  </div>
+</div> 
+
+<div class="futer-block">
+  <div class="futer-block-child">
+    <div class="futer-block-left">
+     <div class="futer-block-logo">
+      <img src="/assets/Frame.svg" alt="logo-2" class="logo-icon">
+      </div>
+      <div class="contact-information">
+        <img src="/assets/call-calling.png" alt="phone-call" class="call-icon">
+        <div class="phone-number">Контактный телефон
+          <div class="phone-number-1">+ 7 (812) 309-09-34</div>
+          <div class="phone-number-2">+ 7 (965) 084-29-09</div>
+      </div>
+      <div class="email-information">
+       <img src="/assets/sms.png" alt="sms" class="sms-icon">
+       <div class="email-inscription">Электронная почта
+        <div class="email-1">tustin78&#64;mail.ru</div>
+        <div class="email-2">info&#64;tustin.ru</div>
+       </div>
+      </div>
+    </div>
+        <div class="futer-block-nav">
+        <a class="futer-block-nav-item">Главная</a>
+        <a class="futer-block-nav-item">О компании</a>
+        <a class="futer-block-nav-item">Каталог</a>
+       </div>
+       <div class="social-icons">
+        <div class="social-icons-item">
+          <img src="/assets/facebook-icon.png" alt="facebook" class="social-icon">
+        </div>
+        <div class="social-icons-item">
+          <img src="/assets/youtube-icon.png" alt="youtube" class="social-icon-2">
+        </div>
+        <div class="social-icons-item">
+          <img src="/assets/whatsapp-icon.png" alt="whatsapp" class="social-icon">
+        </div>
+      </div>
+     </div>
+
+<div class="futer-block-right">
+  <div class="futer-block-right-content">
+  <div class="futer-block-right-text">
+    Остались вопросы?
+  </div>
+  <div class="futer-block-right-information">
+    Узнавайте первым о скидках, предложениях и событиях еженедельно 
+    в своем почтовом ящике. Отпишитесь в любое время одним щелчком мыши.
+  </div>
+<div class="email-subscription">
+  <form>
+    <div class="input-wrapper">
+      <input type="email" placeholder="Введите свою почту">
+      <span class="input-icon"></span>
+    </div>
+    <button type="submit">Отправить</button>
+  </form>
+</div>
+  <div class="data-execution-block">
+    © 2021-2022, EDE
+  </div>
+</div>
+</div>
+</div>
 </div>
