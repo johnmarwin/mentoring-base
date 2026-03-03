@@ -38,7 +38,7 @@ if (name === 'Ahmed') {
 })
 export class AppComponent {
   
-Pages = [1, 2, 3, 4, 5]
+pages = [1, 2, 3, 4, 5]
 newPages = this.Pages.slice().reverse();
 
 activePage = 5;
@@ -60,17 +60,5 @@ readonly firstheader1 = `Главная`
 readonly firstheader2 = `О компании`
 
 readonly firstheader3 = `Каталог`
-
-
-quantity: any;
-firstheader: any;
-increase() {
-throw new Error('Method not implemented.');
-}
-decrease() {
-throw new Error('Method not implemented.');
-}
-  title = 'mentoring-first-project';
-}
 
 
