@@ -1,6 +1,7 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { HeaderComponent } from './header/header.component';
 
 const name: string = 'Ahmed'
 const surname: string = 'Kakiyev'
@@ -12,6 +13,15 @@ if (name === 'Ahmed') {
 } else {
   console.log('в имени ошибка')
 }
+
+const user = {
+  name: 'Ahmed',
+  surname: 'Kakiev',
+  height: 185,
+  weight: 95
+}
+
+console.log(user)
 
 // const name = `Ahmed`;
 
@@ -32,33 +42,17 @@ if (name === 'Ahmed') {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterModule, NgIf, NgFor],
+  imports: [RouterModule, NgIf, NgFor, HeaderComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   
 pages = [1, 2, 3, 4, 5]
-newPages = this.Pages.slice().reverse();
+newPages = this.pages.slice().reverse();
 
 activePage = 5;
 
-isShowCatalog = true;
-
 isShowImg: boolean = true;
 
-catalog = ["Каталог", "Стройматериалы", "Инструменты", "Электрика", "Интерьер и одежда"];
-
-isUpperCase = false;
-
-toggleText() {
-  this.isUpperCase = !this.isUpperCase;
 }
-
-readonly firstheader1 = `Главная`
-
-readonly firstheader2 = `О компании`
-
-readonly firstheader3 = `Каталог`
-
-
