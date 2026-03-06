@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { NgIf, NgFor } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [NgIf, NgFor],
+  imports: [RouterModule, NgIf, NgFor],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })

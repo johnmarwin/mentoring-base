@@ -8,6 +8,7 @@
       <a class="header-nav-item">{{ firstheader1 }}</a>
       <a class="header-nav-item">{{ firstheader2 }}</a>
       <a class="header-nav-item" *ngIf="isShowCatalog">{{ firstheader3 }}</a>
+       <a class="header-nav-item" routerLink="/users">Пользователи</a>
      </nav>
      <button (click)="isShowCatalog = !isShowCatalog">Скрыть/Показать каталог</button>
   </div>

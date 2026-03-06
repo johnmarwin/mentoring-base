@@ -1,0 +1,9 @@
+<div class="user-container">
+    <div class="user-card" *ngFor="let user of users">
+    <h3>{{ user.name }}</h3>
+    <p>Email: {{ user.email }}</p>
+    <p>Телефон: {{ user.phone }}</p>
+    <p>Сайт: {{ user.website }}</p>
+    <button class="user-button">Подробнее</button>
+    </div>
+</div>
